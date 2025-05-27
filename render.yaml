@@ -5,8 +5,10 @@ services:
     region: oregon
     plan: free
     buildCommand: |
-      npm install --legacy-peer-deps
-      npm install -g next
+      npm cache clean --force
+      rm -rf node_modules
+      rm -rf .next
+      npm install
       npm run build
     startCommand: npm start
     healthCheckPath: /

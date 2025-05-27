@@ -2,8 +2,27 @@ services:
   - type: web
     name: healthcare-ai
     env: node
+    region: oregon
+    plan: free
     buildCommand: npm install && npm run build
     startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
-        value: production 
+        value: production
+      - key: NEXT_PUBLIC_BASE_URL
+        value: https://healthcare-ai.onrender.com
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-XSS-Protection
+        value: 1; mode=block
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains 

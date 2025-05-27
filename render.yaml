@@ -4,7 +4,8 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: npm install && npm run build
+    rootDir: .
+    buildCommand: cd . && npm install && npm run build
     startCommand: npm start
     healthCheckPath: /
     autoDeploy: true
